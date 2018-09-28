@@ -9,6 +9,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
+from keras.utils import plot_model
 
 num_classes = 10
 verbose = 0
@@ -71,7 +72,7 @@ def fit(model, data_augmentation=False, batch_size=32):
         model.fit(X_train, y_train, batch_size=32, epochs=4, validation_data=(X_test, y_test), verbose=verbose)
 
 
-def save(model, path="minstCNN.h5"):
+def save(model, path="output/minstCNN.h5"):
     for k in model.layers:
         if type(k) is Dropout:
             model.layers.remove(k)
@@ -90,6 +91,9 @@ def main():
     model = build_model()
     global verbose
     verbose = args.verbose
+
+    if verbose >= 2:
+        plot_model(model, show_shapes=True, to_file="output/model.png")
 
     if args.train:
         fit(model, data_augmentation=args.augment)
