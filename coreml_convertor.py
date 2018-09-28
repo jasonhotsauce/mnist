@@ -15,7 +15,7 @@ def main():
         exit(1)
     author = input("Author: ")
     description = input("Description: ")
-    license = input("license")
+    license = input("license: ")
     input_name = input("Model input name: ")
     input_description = input("Model input description: ")
     output_name = input("Model output name: ")
